@@ -15,12 +15,79 @@ const maharajaImage = 'https://images.pexels.com/photos/8082217/pexels-photo-808
 
 function Hero() {
   const root = useRef<HTMLElement>(null);
-  useEffect(() => { if (!root.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; const ctx = gsap.context(() => { gsap.fromTo('.hero-video', { scale: 1.15 }, { scale: 1, duration: 2.5, ease: 'power3.out' }); gsap.fromTo('.hero-reveal', { yPercent: 110 }, { yPercent: 0, stagger: 0.1, duration: 1.5, delay: 0.5, ease: 'power4.out' }); gsap.fromTo('.hero-fade', { opacity: 0, y: 30 }, { opacity: 1, y: 0, stagger: 0.15, duration: 1.2, delay: 1.2, ease: 'power3.out' }); }, root); return () => ctx.revert(); }, []);
-  return <section ref={root} className="relative flex h-[100svh] min-h-[680px] items-end overflow-hidden bg-charcoal"><video autoPlay loop muted playsInline className="hero-video absolute inset-0 h-full w-full object-cover"><source src="https://videos.pexels.com/video-files/3011326/3011326-uhd_2560_1440_24fps.mp4" type="video/mp4" /></video><div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,16,12,.35)_0%,rgba(20,16,12,.1)_35%,rgba(20,16,12,.85)_100%)]" /><div className="container-luxury relative z-10 pb-32 md:pb-40"><div className="max-w-4xl"><div className="line-mask"><p className="hero-reveal font-sans text-[11px] font-medium tracking-[0.45em] text-gold">PALACE HOTEL & RESORT · JAIPUR</p></div><div className="line-mask mt-7"><h1 className="hero-reveal font-serif text-hero text-ivory">Where timeless<br /><i className="font-light">luxury</i> meets soul.</h1></div><p className="hero-fade mt-10 max-w-md font-serif text-2xl leading-relaxed text-ivory/85 md:text-3xl">A contemporary palace in the heart of Rajasthan, created for those who seek the extraordinary.</p><div className="hero-fade mt-12 flex flex-wrap items-center gap-8"><MagneticButton to="/booking" light>BOOK YOUR STAY</MagneticButton><Link to="/rooms" className="group flex items-center gap-4 text-xs tracking-[0.2em] text-ivory/80 transition-colors hover:text-gold"><span className="h-px w-10 bg-gold transition-all group-hover:w-16" />EXPLORE AURELIA</Link></div></div></div><ScrollDown /></section>;
+  useEffect(() => { if (!root.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; const ctx = gsap.context(() => { gsap.fromTo('.hero-video', { scale: 1.4 }, { scale: 1.18, duration: 2.5, ease: 'power3.out' }); gsap.fromTo('.hero-reveal', { yPercent: 110 }, { yPercent: 0, stagger: 0.1, duration: 1.5, delay: 0.5, ease: 'power4.out' }); gsap.fromTo('.hero-fade', { opacity: 0, y: 30 }, { opacity: 1, y: 0, stagger: 0.15, duration: 1.2, delay: 1.2, ease: 'power3.out' }); }, root); return () => ctx.revert(); }, []);
+  return (
+    <section ref={root} className="relative flex h-[100svh] min-h-[680px] items-center justify-center overflow-hidden bg-charcoal text-center">
+      <div className="absolute inset-0 h-full w-full overflow-hidden">
+        <video autoPlay loop muted playsInline className="hero-video absolute inset-0 h-[100%] w-full object-cover">
+          <source src="/hotel-video.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.6)_100%)]" />
+      <div className="container-luxury relative z-10 mt-16 flex flex-col items-center">
+        <div className="line-mask overflow-hidden pb-2">
+          <p className="hero-reveal font-sans text-[11px] font-medium tracking-[0.45em] text-gold drop-shadow-sm">AURELIA PALACE · JAIPUR</p>
+        </div>
+        <div className="line-mask mt-6 overflow-hidden pb-4">
+          <h1 className="hero-reveal font-serif text-[clamp(3.2rem,9vw,7.5rem)] leading-[1.05] text-ivory drop-shadow-lg">
+            Where timeless<br /><i className="font-light">luxury</i> meets soul.
+          </h1>
+        </div>
+        <p className="hero-fade mt-8 max-w-2xl font-serif text-xl leading-relaxed text-ivory/90 md:text-2xl drop-shadow-md">
+          A contemporary palace in the heart of Rajasthan,<br className="hidden md:block" /> created for those who seek the extraordinary.
+        </p>
+        <div className="hero-fade mt-14 flex flex-col items-center gap-6 md:flex-row md:gap-10">
+          <MagneticButton to="/booking" light>BOOK YOUR STAY</MagneticButton>
+          <Link to="/rooms" className="group flex items-center gap-4 text-[11px] tracking-[0.2em] text-ivory/90 transition-colors hover:text-gold">
+            EXPLORE THE PALACE <ArrowDownRight size={16} className="transition-transform group-hover:translate-x-1 group-hover:translate-y-1" />
+          </Link>
+        </div>
+      </div>
+      <ScrollDown />
+    </section>
+  );
 }
 
 function BookingBar() {
-  return <section className="relative z-20 mx-4 -mt-8 bg-ivory px-6 py-6 shadow-2xl shadow-black/20 text-charcoal md:mx-auto md:-mt-16 md:max-w-6xl md:px-12 md:py-10 border border-charcoal/5"><div className="grid items-end gap-6 md:grid-cols-[1fr_1fr_.8fr_.8fr_auto] md:gap-8"><div className="border-b border-charcoal/20 pb-2"><label className="mb-3 block text-[11px] tracking-[0.25em] text-gold-dark">CHECK-IN</label><input type="text" placeholder="DD / MM / YYYY" className="w-full bg-transparent text-sm font-serif outline-none placeholder:text-charcoal/40" /></div><div className="border-b border-charcoal/20 pb-2"><label className="mb-3 block text-[11px] tracking-[0.25em] text-gold-dark">CHECK-OUT</label><input type="text" placeholder="DD / MM / YYYY" className="w-full bg-transparent text-sm font-serif outline-none placeholder:text-charcoal/40" /></div><div className="border-b border-charcoal/20 pb-2"><label className="mb-3 block text-[11px] tracking-[0.25em] text-gold-dark">GUESTS</label><select className="w-full bg-transparent text-sm font-serif outline-none cursor-pointer"><option>2 Guests</option><option>1 Guest</option><option>3 Guests</option><option>4 Guests</option></select></div><div className="border-b border-charcoal/20 pb-2"><label className="mb-3 block text-[11px] tracking-[0.25em] text-gold-dark">ROOMS</label><select className="w-full bg-transparent text-sm font-serif outline-none cursor-pointer"><option>1 Room</option><option>2 Rooms</option><option>3 Rooms</option></select></div><Link to="/booking" className="group inline-flex items-center justify-center gap-3 bg-charcoal px-7 py-4 text-[11px] tracking-[0.2em] text-ivory transition-all duration-500 hover:bg-gold hover:text-charcoal">CHECK AVAILABILITY <ArrowUpRight size={14} /></Link></div></section>;
+  return (
+    <div className="relative z-20 mx-4 flex justify-center md:mx-auto md:max-w-6xl">
+      <div className="absolute top-0 w-full -translate-y-1/2">
+        <section className="bg-ivory px-6 py-6 shadow-2xl shadow-black/20 text-charcoal md:px-12 md:py-10 border border-charcoal/5">
+          <div className="grid items-end gap-6 md:grid-cols-[1fr_1fr_.8fr_.8fr_auto] md:gap-8">
+            <div className="border-b border-charcoal/20 pb-2">
+              <label className="mb-3 block text-[11px] tracking-[0.25em] text-gold-dark">CHECK-IN</label>
+              <input type="text" placeholder="DD / MM / YYYY" className="w-full bg-transparent text-sm font-serif outline-none placeholder:text-charcoal/40" />
+            </div>
+            <div className="border-b border-charcoal/20 pb-2">
+              <label className="mb-3 block text-[11px] tracking-[0.25em] text-gold-dark">CHECK-OUT</label>
+              <input type="text" placeholder="DD / MM / YYYY" className="w-full bg-transparent text-sm font-serif outline-none placeholder:text-charcoal/40" />
+            </div>
+            <div className="border-b border-charcoal/20 pb-2">
+              <label className="mb-3 block text-[11px] tracking-[0.25em] text-gold-dark">GUESTS</label>
+              <select className="w-full bg-transparent text-sm font-serif outline-none cursor-pointer">
+                <option>2 Guests</option>
+                <option>1 Guest</option>
+                <option>3 Guests</option>
+                <option>4 Guests</option>
+              </select>
+            </div>
+            <div className="border-b border-charcoal/20 pb-2">
+              <label className="mb-3 block text-[11px] tracking-[0.25em] text-gold-dark">ROOMS</label>
+              <select className="w-full bg-transparent text-sm font-serif outline-none cursor-pointer">
+                <option>1 Room</option>
+                <option>2 Rooms</option>
+                <option>3 Rooms</option>
+              </select>
+            </div>
+            <Link to="/booking" className="group inline-flex items-center justify-center gap-3 bg-charcoal px-7 py-4 text-[11px] tracking-[0.2em] text-ivory transition-all duration-500 hover:bg-gold hover:text-charcoal">
+              CHECK AVAILABILITY <ArrowUpRight size={14} />
+            </Link>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
 }
 
 function StorySection() {
@@ -84,5 +151,7 @@ function FinalCta() {
 }
 
 export default function HomePage() {
-  return <main><Hero /><BookingBar /><StorySection /><RoomsSection /><MaharajaFeature /><DiningSection /><ExperiencesSection /><WellnessSection /><GallerySection /><LocationSection /><JournalSection /><TestimonialSection /><OffersSection /><FinalCta /></main>;
+  return <main><Hero />
+    <BookingBar />
+    <StorySection /><RoomsSection /><MaharajaFeature /><DiningSection /><ExperiencesSection /><WellnessSection /><GallerySection /><LocationSection /><JournalSection /><TestimonialSection /><OffersSection /><FinalCta /></main>;
 }
